@@ -24,7 +24,7 @@ model Channel {
   logo         String   @db.VarChar
   videos       Video[]
   ownerAddress String   @db.VarChar(255)
-  createdDate  DateTime @updatedAt
+  createdDate  DateTime @default(now())
 }
 
 model Video {
@@ -43,14 +43,14 @@ model Video {
   isFreeVideo   Boolean     @default(false)
   comments      Comment[]
   views         VideoView[]
-  createdDate   DateTime    @updatedAt
+  createdDate   DateTime    @default(now())
 }
 
 model Subscription {
   id                Int      @id @default(autoincrement())
   channelId         Int
   subscriberAddress String   @db.VarChar(255)
-  createdDate       DateTime @updatedAt
+  createdDate       DateTime @default(now())
 }
 
 model Comment {
@@ -60,7 +60,7 @@ model Comment {
   videoId     Int
   video       Video          @relation(fields: [videoId], references: [id])
   replies     CommentReply[]
-  createdDate DateTime       @updatedAt
+  createdDate DateTime       @default(now())
 }
 
 model CommentReply {
@@ -68,7 +68,7 @@ model CommentReply {
   reply       String   @db.VarChar
   commentId   Int
   comment     Comment  @relation(fields: [commentId], references: [id])
-  createdDate DateTime @updatedAt
+  createdDate DateTime @default(now())
 }
 
 model VideoView {

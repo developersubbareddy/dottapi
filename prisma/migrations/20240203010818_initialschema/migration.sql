@@ -15,7 +15,7 @@ CREATE TABLE "Channel" (
     "description" VARCHAR NOT NULL,
     "logo" VARCHAR NOT NULL,
     "ownerAddress" VARCHAR(255) NOT NULL,
-    "createdDate" TIMESTAMP(3) NOT NULL,
+    "createdDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Channel_pkey" PRIMARY KEY ("id")
 );
@@ -34,7 +34,7 @@ CREATE TABLE "Video" (
     "locked" BOOLEAN NOT NULL DEFAULT false,
     "price" INTEGER NOT NULL DEFAULT 0,
     "isFreeVideo" BOOLEAN NOT NULL DEFAULT false,
-    "createdDate" TIMESTAMP(3) NOT NULL,
+    "createdDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Video_pkey" PRIMARY KEY ("id")
 );
@@ -44,7 +44,7 @@ CREATE TABLE "Subscription" (
     "id" SERIAL NOT NULL,
     "channelId" INTEGER NOT NULL,
     "subscriberAddress" VARCHAR(255) NOT NULL,
-    "createdDate" TIMESTAMP(3) NOT NULL,
+    "createdDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Subscription_pkey" PRIMARY KEY ("id")
 );
@@ -55,7 +55,7 @@ CREATE TABLE "Comment" (
     "address" VARCHAR NOT NULL,
     "comment" VARCHAR NOT NULL,
     "videoId" INTEGER NOT NULL,
-    "createdDate" TIMESTAMP(3) NOT NULL,
+    "createdDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "Comment_pkey" PRIMARY KEY ("id")
 );
@@ -65,7 +65,7 @@ CREATE TABLE "CommentReply" (
     "id" SERIAL NOT NULL,
     "reply" VARCHAR NOT NULL,
     "commentId" INTEGER NOT NULL,
-    "createdDate" TIMESTAMP(3) NOT NULL,
+    "createdDate" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "CommentReply_pkey" PRIMARY KEY ("id")
 );

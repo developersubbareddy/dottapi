@@ -1,14 +1,28 @@
 const channelsRoute = require("express").Router()
-const { PrismaClient } = require('@prisma/client');
-const prisma = new PrismaClient();
-
+const { createChannel, getChannels, getChannel } = require('./context');
 channelsRoute.get("/", async (req, res) => {
-    const data = await prisma.channel.findMany();
-    res.status(200).send(data)
+    try {
+        const data = await getChannels();
+        res.status(200).send(data);
+    } catch (error) {
+        res.status(500).send(error)
+    }
 });
 channelsRoute.get("/:id", async (req, res) => {
-   const channel = await prisma.channel.findUnique({where:{id:parseInt(req.params.id)},include:{videos:true}});
-   res.status(200).send(channel);
-})
+    try {
+        const channel = await getChannel(req.params.id);
+        res.status(200).send(channel);
+    } catch (error) {
+        res.status(500).send(error)
+    }
+});
+channelsRoute.post("/create", async (req, res) => {
+    try {
+        const result = await createChannel(req.body);
+        res.status(200).send(result)
+    } catch (error) {
+        res.status(500).send(error)
+    }
+});
 
 module.exports = channelsRoute;
